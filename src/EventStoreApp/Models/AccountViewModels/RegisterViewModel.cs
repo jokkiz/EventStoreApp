@@ -23,5 +23,11 @@ namespace EventStoreApp.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Фамилия пользователя")]
+        public string FirstName { get; set; }
+
+        [Display(Name="Имя пользователя")]
+        public string LastName { get; set; }
     }
 }

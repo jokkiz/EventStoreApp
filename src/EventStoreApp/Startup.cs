@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using EventStoreApp.Data;
 using EventStoreApp.Models;
+using EventStoreApp.Models.Abstract;
+using EventStoreApp.Models.Concrete;
 using EventStoreApp.Services;
 
 namespace EventStoreApp
@@ -43,6 +45,7 @@ namespace EventStoreApp
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<IEventRepository, EventRepository>();
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
