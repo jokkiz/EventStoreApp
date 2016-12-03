@@ -1,6 +1,27 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿@import url('https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic');
+@font-face {
+    font-family: 'Roboto Condensed';
+}
+body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+	display: flex;
+    flex-flow: row wrap;
+	/*font-size: large;*/
+    font-family: 'Roboto Condensed', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+nav {
+    padding-right: 30px;
+    font-family: 'Roboto Condensed', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Lobster', 'Roboto Condensed', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
+}
+h3, h4 {
+    font-family: 'Roboto Condensed', 'Roboto', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Wrapping element */

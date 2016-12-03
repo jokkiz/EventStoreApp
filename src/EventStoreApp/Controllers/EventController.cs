@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EventStoreApp.Models;
 using EventStoreApp.Models.Abstract;
 using EventStoreApp.Models.Entities;
+using EventStoreApp.Models.EventViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,8 @@ namespace EventStoreApp.Controllers
     public class EventController : Controller
     {
         private readonly IEventRepository repository;
-        private readonly UserManager<ApplicationUser> manager; 
+        private readonly UserManager<ApplicationUser> manager;
+        public int PageSize = 9;
 
         public EventController(IEventRepository repository, UserManager<ApplicationUser> manager)
         {
@@ -24,10 +26,11 @@ namespace EventStoreApp.Controllers
             this.manager = manager;
         }
 
-        public ViewResult Index(string searchString, int page=1)
+        public IActionResult Index(string searchString, int page=1)
         {
-
-            return View();
+            IEventList builder = new EventListViewBuilder(repository);
+            var viewModel = new EventListViewModel {EventList = builder.ListEvents(searchString)};
+            return View(viewModel);
         }
 
         [HttpGet]

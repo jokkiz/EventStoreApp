@@ -13,6 +13,7 @@ using EventStoreApp.Data;
 using EventStoreApp.Models;
 using EventStoreApp.Models.Abstract;
 using EventStoreApp.Models.Concrete;
+using EventStoreApp.Models.EventViewModel;
 using EventStoreApp.Services;
 
 namespace EventStoreApp
@@ -46,6 +47,7 @@ namespace EventStoreApp
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IEventList, EventListViewBuilder>();
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

@@ -1,0 +1,23 @@
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model  EventStoreApp.Models.EventViewModel.EventListViewModel
+
+@{
+    ViewData["Title"] = "Список событий";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список мероприятий</h2>
+<form class="form-inline" method="POST" asp-controller="Event" asp-action="Index">
+    <div class="form-group">
+        <label for="inputString"><i class="fa fa-search fa-lg" aria-hidden="true"></i></label>
+        <input type="text" name="searchString" class="form-control" id="inputString"/>
+    </div>
+    <div class="btn btn-group">
+        <button type="submit" class="btn btn-primary">Поиск</button>&nbsp;
+        <a class="btn btn-default" role="button" asp-action="Create">Добавить новое мероприятие</a>
+    </div>
+</form>
+<br />
+<div class="row">
+    @
+</div>

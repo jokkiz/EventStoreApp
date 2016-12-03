@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http.Internal
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,11 +30,15 @@
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Event Store</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+              <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
                     <li><a asp-area="" asp-controller="Event" asp-action="Index">События</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">О нас</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакты</a></li>
-                </ul>
+                }
+
+                <li><a asp-area="" asp-controller="Home" asp-action="About">О нас</a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Contact">Контакты</a></li>
+              </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
