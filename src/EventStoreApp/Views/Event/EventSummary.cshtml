@@ -1,0 +1,16 @@
+﻿@model EventStoreApp.Models.Entities.Event
+<div class="thumbnail">
+  @if (Model.ImageData != null)
+  {
+      <a target="_blank" asp-action="Details" asp-controller="Event">
+        <img class="img-rounded img-responcsive" src="@Url.Action("Index", "Event", new {Model.ShortName})"/>
+      </a>
+  }
+  <div class="caption">
+    <h2>@Html.ActionLink(@Model.Name, "Details", new { shortName = Model.ShortName })</h2>
+    <p><i class="fa fa-calendar fa-lg" aria-hidden="true"></i>&nbsp; @Model.DateBegin.ToString() </p>
+    <p><i class="fa fa-calendar fa-lg" aria-hidden="true"></i>&nbsp; @Model.DateEnd.ToString()</p>
+    <p><a class="btn btn-default" role="button" asp-action="Details" asp-controller="Event" asp-route-id="@Model.ShortName" >Подробности и регистрация</a>
+    </p>
+  </div>
+</div>

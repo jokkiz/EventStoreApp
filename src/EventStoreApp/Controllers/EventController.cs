@@ -40,7 +40,8 @@ namespace EventStoreApp.Controllers
             {
                 return BadRequest();
             }
-            Event e = repository.Events.FirstOrDefault(model => model.ShortName == shortName);
+            EventViewModelBuilder builder = new EventViewModelBuilder();
+            EventViewModel e = builder.CreateEventViewModel(repository.GetEvent(shortName));
             if (e == null)
             {
                 return NotFound();
@@ -59,11 +60,11 @@ namespace EventStoreApp.Controllers
             item.Owner = currentUser.Result;
             if (!ModelState.IsValid) return View(item);
             repository.SaveEvent(item);
-            TempData["message"] = $"{item.Name} ��������� �������";
+            //TempData["message"] = $"{item.Name} добавлен успешно";
             return RedirectToAction("Index");
         }
 
-        public ViewResult Edit(int eventId) => View(repository.Events.FirstOrDefault(i=>i.Id== eventId));
+        public ViewResult Edit(string shortName) => View(repository.Events.FirstOrDefault(i=>i.ShortName == shortName));
 
         [HttpPost]
         public IActionResult Edit(Event item)
@@ -71,7 +72,7 @@ namespace EventStoreApp.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveEvent(item);
-                TempData["message"] = $"{item.Name} �������� �������";
+                //TempData["message"] = $"{item.Name} изменен успешно";
                 return RedirectToAction("Index");
             }
             else
@@ -85,10 +86,10 @@ namespace EventStoreApp.Controllers
         public IActionResult Delete(int eventId)
         {
             Event eventToDelete = repository.DeleteEvent(eventId);
-            if (eventToDelete != null)
+           /* if (eventToDelete != null)
             {
                 TempData["message"] = $"{eventToDelete.Name} ���� ������� �������";
-            }
+            }*/
             return RedirectToAction("Index");
         }
     }

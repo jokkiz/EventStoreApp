@@ -11,5 +11,6 @@ namespace EventStoreApp.Models.Abstract
         IEnumerable<Event> Events { get; }
         void SaveEvent(Event item);
         Event DeleteEvent(int id);
+        Event GetEvent(string shortName);
     }
 }

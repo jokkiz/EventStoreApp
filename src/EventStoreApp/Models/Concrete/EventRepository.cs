@@ -7,6 +7,7 @@ using EventStoreApp.Models.Abstract;
 using EventStoreApp.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventStoreApp.Models.Concrete
 {
@@ -56,6 +57,14 @@ namespace EventStoreApp.Models.Concrete
             return dbEvent;
         }
 
+        public Event GetEvent(string shortName)
+        {
+            var item = context.Events
+                 .Include(o => o.Owner)
+                 .Include(a=>a.EventAmenities)
+                .FirstOrDefault(e => e.ShortName == shortName);
+            return item;
+        } 
 
 
     }

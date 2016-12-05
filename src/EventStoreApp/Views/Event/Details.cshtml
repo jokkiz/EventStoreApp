@@ -1,8 +1,49 @@
-﻿@model EventStoreApp.Models.Entities.Event
+﻿@using EventStoreApp.Models.EventViewModel
+@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model EventViewModel
 
 @{
-    ViewBag.Title = string.Format("{0} - ", Model.Name);
+    ViewBag.Title = string.Format("{0} ", Model.Name);
     Layout = "_Layout";
 }
+<div class="jumbotron">
+    <p class="lead">
+        <h4>@Model.DateBegin.Date (@Model.DateBegin.DayOfWeek) @Model.DateBegin.TimeOfDay - @Model.DateEnd.Date (@Model.DateEnd.DayOfWeek) @Model.DateEnd.TimeOfDay</h4>
+    </p>
+    <h1>@Model.Name</h1>
+    <p><a class="btn btn-lg btn-primary" role="button" data-toggle="modal" data-target="#regToEvent">Зарегистрироваться</a></p>
+</div>
+<hr />
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+        @Html.Raw(Model.Description)
+        @if (Model.Amenities.Any())
+        {
+            <h2>Варианты пребывания:</h2>
+            <div class="row">
+                <table class="table table-striped">
+                    @foreach(var item in Model.Amenities)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.DateBegin</td>
+                            <td>@item.DateEnd</td>
+                            <td>@item.Cost&nbsp;
+                            <span class="fa-stack">
+                                <i class="fa fa-square-o fa-stack-2x"></i>
+                                <i class="fa fa-rub fa-stack-1x"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </table> 
+            </div>
+        }
+        <h4>Автор:&nbsp;@Model.OwnerName</h4>
+        <p>
+            <a asp-controller="Event" asp-action="Edit">Редактировать</a>
+            <a asp-action="Index" asp-controller="Event">Назад к списку мероприятий</a>
+        </p>
 
-<h2>title</h2>
+    </div>
+</div>

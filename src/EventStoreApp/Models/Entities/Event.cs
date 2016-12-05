@@ -31,7 +31,7 @@ namespace EventStoreApp.Models.Entities
         public DateTime DateBegin { get; set; }
 
         [DataType(DataType.DateTime)]
-        [Display(Name = "Дата начала")]
+        [Display(Name = "Дата окончания")]
         public DateTime DateEnd { get; set; }
 
         public byte[] ImageData { get; set; }
