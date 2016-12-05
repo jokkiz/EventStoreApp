@@ -1,6 +1,7 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using EventStoreApp.Models;
 using EventStoreApp.Models.Abstract;
@@ -33,6 +34,20 @@ namespace EventStoreApp.Controllers
             return View(viewModel);
         }
 
+        public IActionResult Details(string shortName)
+        {
+            if (string.IsNullOrEmpty(shortName))
+            {
+                return BadRequest();
+            }
+            Event e = repository.Events.FirstOrDefault(model => model.ShortName == shortName);
+            if (e == null)
+            {
+                return NotFound();
+            }
+            return View(e);
+        }
+
         [HttpGet]
         public ActionResult Create() => View("Edit", new Event());
 
@@ -44,7 +59,7 @@ namespace EventStoreApp.Controllers
             item.Owner = currentUser.Result;
             if (!ModelState.IsValid) return View(item);
             repository.SaveEvent(item);
-            TempData["message"] = $"{item.Name} добавлено успешно";
+            TempData["message"] = $"{item.Name} пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
             return RedirectToAction("Index");
         }
 
@@ -56,7 +71,7 @@ namespace EventStoreApp.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveEvent(item);
-                TempData["message"] = $"{item.Name} изменено успешно";
+                TempData["message"] = $"{item.Name} пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
                 return RedirectToAction("Index");
             }
             else
@@ -72,7 +87,7 @@ namespace EventStoreApp.Controllers
             Event eventToDelete = repository.DeleteEvent(eventId);
             if (eventToDelete != null)
             {
-                TempData["message"] = $"{eventToDelete.Name} было удалено успешно";
+                TempData["message"] = $"{eventToDelete.Name} пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
             }
             return RedirectToAction("Index");
         }
