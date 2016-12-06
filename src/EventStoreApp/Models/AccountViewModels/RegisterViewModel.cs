@@ -25,14 +25,20 @@ namespace EventStoreApp.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "Введите один и тот же пароль оба раза.")]
         public string ConfirmPassword { get; set; }
 
+        [Required]
         [Display(Name = "Фамилия")]
         public string FirstName { get; set; }
 
+        [Required]
         [Display(Name="Имя")]
         public string LastName { get; set; }
 
         [Display(Name = "Имя пользователя")]
         [StringLength(20, ErrorMessage = "Поле {0} не может быть менее {2} символов.", MinimumLength = 6)]
-        public string Username { get; set; }
+        public string UserName { get; set; }
+
+        [Display(Name = "День рождения")]
+        [DataType(DataType.Date)]
+        public DateTime BirthDay { get; set; }
     }
 }

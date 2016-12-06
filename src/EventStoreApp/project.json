@@ -1,4 +1,7 @@
 {
+  "title": "Event Store App",
+  "description": "Application for events",
+  "language": "ru",
   "userSecretsId": "aspnet-EventStoreApp-90e5f1e4-91b1-4ffb-83fc-53054ed7ff45",
   "dependencies": {
     "bootstrap": "3.3.7",
