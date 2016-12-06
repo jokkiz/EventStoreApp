@@ -13,6 +13,7 @@ namespace EventStoreApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-       public List<Event> UserEvents { get; set; } 
+        public string Username { get; set; }
+        public List<Event> UserEvents { get; set; } 
     }
 }

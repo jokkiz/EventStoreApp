@@ -8,6 +8,6 @@ namespace EventStoreApp.Models.Abstract
 {
     interface IEventList
     {
-        IEnumerable<Event> ListEvents(string searchString);
+        IEnumerable<Event> ListEvents(string searchString, int page = 1);
     }
 }
