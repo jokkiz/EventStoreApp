@@ -11,14 +11,17 @@ namespace EventStoreApp.Models.EventViewModel
     public class EventListViewBuilder: IEventList
     {
         private readonly IEventRepository repository;
+        public int PageSize = 9;
 
         public EventListViewBuilder(IEventRepository repository)
         {
             this.repository = repository;
         }
 
-        public IEnumerable<Event> ListEvents(string searchString) => repository.Events
+        public IEnumerable<Event> ListEvents(string searchString, int page = 1) => repository.Events
             .Where(i => string.IsNullOrEmpty(searchString) || i.Name.Contains(searchString))
+            .Skip((page-1)*PageSize)
+            .Take(PageSize)
             .ToList();
     }
 
