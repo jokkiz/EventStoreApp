@@ -44,6 +44,6 @@ namespace EventStoreApp.Models.Entities
         public ApplicationUser Owner { get; set; }
 
         [Display(Name = "Варианты пребывания")]
-        public List<EventAmenity> EventAmenities { get; set; }
+        public List<Amenity> Amenities { get; set; }
     }
 }

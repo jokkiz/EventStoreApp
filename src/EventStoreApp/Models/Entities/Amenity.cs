@@ -11,9 +11,7 @@ namespace EventStoreApp.Models.Entities
     public class Amenity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
-        public List<EventAmenity> EventAmenities { get; set; }
+        public int AmenityId { get; set; }
 
         [Required]
         [StringLength(30)]
@@ -38,12 +36,5 @@ namespace EventStoreApp.Models.Entities
         public decimal Cost { get; set; }
     }
 
-    public class EventAmenity
-    {
-        public int EventId { get; set; }
-        public Event Event { get; set; }
 
-        public int AmenityId { get; set; }
-        public Amenity Amenity { get; set; }
-    }
 }

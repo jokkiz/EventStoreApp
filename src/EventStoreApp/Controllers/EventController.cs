@@ -30,7 +30,7 @@ namespace EventStoreApp.Controllers
         public IActionResult Index(string searchString, int page=1)
         {
             IEventList builder = new EventListViewBuilder(repository);
-            var viewModel = new EventListViewModel {EventList = builder.ListEvents(searchString)};
+            var viewModel = new EventListViewModel {EventList = builder.ListEvents(searchString, page)};
             return View(viewModel);
         }
 

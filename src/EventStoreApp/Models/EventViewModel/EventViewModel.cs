@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EventStoreApp.Models.Abstract;
 using EventStoreApp.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EventStoreApp.Models.EventViewModel
 {
@@ -65,7 +66,7 @@ namespace EventStoreApp.Models.EventViewModel
 
     public class EventViewModelBuilder
     {
-        public EventViewModel CreateEventViewModel(Event e) => new EventViewModel
+       /* public EventViewModel CreateEventViewModel(Event e) => new EventViewModel
         {
             Name = e.Name,
             ShortName = e.ShortName,
@@ -76,7 +77,23 @@ namespace EventStoreApp.Models.EventViewModel
             ImageMimeType = e.ImageMimeType,
             OwnerName = e.Owner.UserName,
             Amenities = e.EventAmenities.Select(a => a.Amenity).ToList()
-        };
-        
+        };*/
+
+        public EventViewModel CreateEventViewModel(Event item)
+        {
+            var ev = new EventViewModel();
+            ev.Name = item.Name;
+            ev.ShortName = item.ShortName;
+            ev.DateBegin = item.DateBegin;
+            ev.DateEnd = item.DateEnd;
+            ev.Description = item.Description;
+            ev.ImageData = item.ImageData;
+            ev.ImageMimeType = item.ImageMimeType;
+            ev.OwnerName = item.Owner.UserName;
+            ev.Amenities = item.Amenities.ToList();
+            return ev;
+        }
+
+
     }
 }

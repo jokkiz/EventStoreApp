@@ -40,7 +40,7 @@ namespace EventStoreApp.Models.Concrete
                     dbEvent.DateEnd = item.DateEnd;
                     dbEvent.ImageData = item.ImageData;
                     dbEvent.ImageMimeType = item.ImageMimeType;
-                    dbEvent.EventAmenities = item.EventAmenities;
+                    dbEvent.Amenities = item.Amenities;
                 }
             }
             context.SaveChanges();
@@ -61,7 +61,7 @@ namespace EventStoreApp.Models.Concrete
         {
             var item = context.Events
                  .Include(o => o.Owner)
-                 .Include(a=>a.EventAmenities)
+                 .Include(a=>a.Amenities)
                 .FirstOrDefault(e => e.ShortName == shortName);
             return item;
         } 
