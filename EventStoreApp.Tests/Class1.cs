@@ -1,5 +1,0 @@
-﻿
-namespace EventStoreApp.Tests
-{
-    
-}

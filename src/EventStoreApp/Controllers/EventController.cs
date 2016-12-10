@@ -27,10 +27,19 @@ namespace EventStoreApp.Controllers
             this.manager = manager;
         }
 
-        public IActionResult Index(string searchString, int page=1)
+        public ViewResult Index(string searchString, int page=1)
         {
             IEventList builder = new EventListViewBuilder(repository);
-            var viewModel = new EventListViewModel {EventList = builder.ListEvents(searchString, page)};
+            var viewModel = new EventListViewModel
+            {
+                EventList = builder.ListEvents(searchString, page),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Events.Count()
+                }
+            };
             return View(viewModel);
         }
 

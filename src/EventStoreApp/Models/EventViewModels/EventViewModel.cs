@@ -29,6 +29,7 @@ namespace EventStoreApp.Models.EventViewModel
     public class EventListViewModel
     {
         public IEnumerable<Event> EventList { get; set; }  
+        public PagingInfo PagingInfo { get; set; }
     }
 
     public class EventViewModel
