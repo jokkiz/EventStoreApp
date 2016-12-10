@@ -81,13 +81,18 @@ namespace EventStoreApp
             app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-
+            
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name:"pagination",
+                    template: "Event/page{page}",
+                    defaults: new {Controller = "Event", action = "Index"});
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }
