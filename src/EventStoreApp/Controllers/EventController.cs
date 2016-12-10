@@ -38,7 +38,8 @@ namespace EventStoreApp.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Events.Count()
-                }
+                },
+                CurrentSearchString = searchString
             };
             return View(viewModel);
         }

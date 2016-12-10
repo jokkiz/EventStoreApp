@@ -29,7 +29,7 @@
                             <td>@item.DateBegin</td>
                             <td>@item.DateEnd</td>
                             <td>@item.Cost&nbsp;
-                            <span class="fa-stack">
+                                <span class="fa-stack">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-rub fa-stack-1x"></i>
                                 </span>
@@ -44,6 +44,41 @@
             <a asp-controller="Event" asp-action="Edit">Редактировать</a>
             <a asp-action="Index" asp-controller="Event">Назад к списку мероприятий</a>
         </p>
+    </div>
+</div>
 
+<!-- Окно регистрации-->
+<div class="modal fade" id="regToEvent" tabindex="-1" role="dialog" aria-labelledby="titleEvent">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="titleEvent">Подача заявки на участие в @Model.Name</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form>
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-6">
+                               @* @Html.DropDownListFor(model => model.Amenities, ViewBag.ChoiseAmenity as SelectList) *@
+                                <label for="versionChoise">Вариант пребывания</label>
+                                <div class="col-md-8 col-sm-6">
+                                    <select id="versionChoise" class="form-control">
+                                        <option value="1">Вариант 1</option>
+                                        <option value="2">Вариант 2</option>
+                                        <option value="3">Вариант 3</option>
+                                        <option value="4">Вариант 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary btn-lg">Подать заявку</button>
+            </div>
+        </div>
     </div>
 </div>

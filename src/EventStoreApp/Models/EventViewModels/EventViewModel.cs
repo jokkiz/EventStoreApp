@@ -30,6 +30,7 @@ namespace EventStoreApp.Models.EventViewModel
     {
         public IEnumerable<Event> EventList { get; set; }  
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentSearchString { get; set; }
     }
 
     public class EventViewModel

@@ -30,7 +30,7 @@ namespace EventStoreApp.Tests
 
             EventController controller = new EventController(mock.Object, null);
             controller.PageSize = 3;
-            EventListViewModel result = controller.Index("", 2).ViewData.Model as EventListViewModel;
+            EventListViewModel result = controller.Index(null, 2).ViewData.Model as EventListViewModel;
 
             Event[] eventArray = result.EventList.ToArray();
             Assert.True(eventArray.Length == 2);
@@ -54,7 +54,7 @@ namespace EventStoreApp.Tests
 
             //Act
             EventController controller = new EventController(mock.Object, null) {PageSize = 3};
-            EventListViewModel result = controller.Index("", 2).ViewData.Model as EventListViewModel;
+            EventListViewModel result = controller.Index(null, 2).ViewData.Model as EventListViewModel;
             
             //Assert
             PagingInfo pageInfo = result.PagingInfo;
@@ -62,6 +62,30 @@ namespace EventStoreApp.Tests
             Assert.Equal(3, pageInfo.ItemsPerPage);
             Assert.Equal(5, pageInfo.TotalItems);
             Assert.Equal(2, pageInfo.TotalPages);
-        }   
+        }
+
+        [Fact]
+        public void Can_Filter_Events()
+        {
+            //Arrange
+            Mock<IEventRepository> mock = new Mock<IEventRepository>();
+            mock.Setup(m => m.Events).Returns(new Event[]
+            {
+                new Event {Id = 1, ShortName = "E10", Name = "Event10"},
+                new Event {Id = 2, ShortName = "E2", Name = "Event2"},
+                new Event {Id = 3, ShortName = "E3", Name = "Event3"},
+                new Event {Id = 4, ShortName = "E4", Name = "Event4"},
+                new Event {Id = 5, ShortName = "E1", Name = "Event1"}
+            });
+
+            //Act
+            EventController controller = new EventController(mock.Object, null) { PageSize = 3 };
+            Event[] result = (controller.Index("1", 1).ViewData.Model as EventListViewModel).EventList.ToArray();
+
+            //Assert
+            Assert.Equal(2, result.Length);
+            Assert.True(result[0].ShortName=="E10");
+            Assert.True(result[1].ShortName == "E1");
+        }
     }
 }
